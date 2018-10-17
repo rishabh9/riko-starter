@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>Home - Riko</title>
+    <script src="/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css"/>
+    <script src="/semantic/semantic.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('.message .close')
+              .on('click', function() {
+                $(this)
+                  .closest('.message')
+                  .transition('fade')
+                ;
+              })
+            ;
+        });
+
+    </script>
+</head>
+<body>
+<div class="ui container">
+    <div class="ui segments">
+        <div class="ui header segment">
+            <i class="user circle icon"></i>
+            Riko
+        </div>
+        <div class="ui black raised segment">
+            <div class="ui small secondary pointing stackable menu">
+                <a th:href="@{/home}" class="ui active item">
+                    Home
+                </a>
+            </div>
+            <div class="ui attached">
+                <div th:if="${message}" class="ui positive message">
+                    <i class="close icon"></i>
+                    <div th:text="${message}">
+                        Success
+                    </div>
+                </div>
+                <div>
+                    <div><h3 th:inline="text">Welcome to Riko starter project!</h3></div>
+                    <table class="ui very basic collapsing celled table">
+                        <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a th:href="@{https://api.upstox.com/index/dialog/authorize(apiKey=${T(com.github.rishabh9.rikostarter.constants.RikoStarterConstants).API_KEY},redirect_uri=${T(com.github.rishabh9.rikostarter.constants.RikoStarterConstants).REDIRECT_URI},response_type=code)}">
+                                    <button class="fluid ui button">
+                                        Upstox Login
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                Use this button to log into Upstox.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a th:href="@{/single}">
+                                    <button class="fluid ui button">
+                                        Download Single Master Contract
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                Use this button to download Master Contract for ACC.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a th:href="@{/all}">
+                                    <button class="fluid ui button">
+                                        Download All Master Contract
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                Use this button to download Master Contracts of all symbols of NSE_EQ.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a th:href="@{/connect}">
+                                    <button class="fluid ui button">
+                                        Connect WebSocket
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                Use this button to connect to the WebSocket.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a th:href="@{/disconnect}">
+                                    <button class="fluid ui button">
+                                        Disconnect WebSocket
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                Use this button to disconnect from the WebSocket.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="ui black center aligned segment">
+            <p><a th:href="@{https://rishabh9.github.io/riko/}">Riko</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
