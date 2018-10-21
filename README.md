@@ -19,3 +19,7 @@ Riko's [wiki](https://github.com/rishabh9/riko/wiki) references this project in 
 5. Open your browser and visit `http://localhost:8080`.
 
 Keep an eye on the console logs to see what happens when you click a button on the UI.
+
+### Screenshot
+![Screenshot of the index page](Screenshot_Index_Page.png)
+
