@@ -48,10 +48,13 @@ dependencies {
             exclude group: 'org.slf4j', module: 'jul-to-slf4j'
         }
     }
+
 	implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-log4j2')
     implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
-    implementation('com.github.rishabh9:riko:2.0.0')
+
+    implementation('com.github.rishabh9:riko:2.0.1')
+
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
