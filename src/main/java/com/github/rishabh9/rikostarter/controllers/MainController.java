@@ -1,10 +1,8 @@
 package com.github.rishabh9.rikostarter.controllers;
 
-import com.github.rishabh9.riko.upstox.common.models.ApiCredentials;
 import com.github.rishabh9.riko.upstox.login.LoginService;
 import com.github.rishabh9.riko.upstox.login.models.AccessToken;
 import com.github.rishabh9.riko.upstox.login.models.TokenRequest;
-import com.github.rishabh9.rikostarter.models.UpstoxAuth;
 import com.github.rishabh9.rikostarter.services.MasterContractService;
 import com.github.rishabh9.rikostarter.services.UpstoxWebSocketService;
 import com.github.rishabh9.rikostarter.utilities.Cache;
@@ -17,7 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.concurrent.ExecutionException;
 
-import static com.github.rishabh9.rikostarter.constants.RikoStarterConstants.*;
+import static com.github.rishabh9.rikostarter.constants.RikoStarterConstants.GRANT_TYPE;
+import static com.github.rishabh9.rikostarter.constants.RikoStarterConstants.REDIRECT_URI;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Log4j2
@@ -33,20 +32,19 @@ public class MainController {
     @Autowired
     private UpstoxWebSocketService upstoxWebSocketService;
 
+    @Autowired
+    private LoginService loginService;
+
     @RequestMapping(value = "/callback", method = GET)
     public ModelAndView callback(@RequestParam(required = false) String code)
             throws Exception {
         log.info("Receiving code from Upstox - {}", code);
 
         final TokenRequest tokenRequest = new TokenRequest(code, GRANT_TYPE, REDIRECT_URI);
-        final ApiCredentials credentials = new ApiCredentials(API_KEY, API_SECRET);
         try {
-            final AccessToken accessToken = new LoginService(tokenRequest, credentials).getAccessToken();
+            final AccessToken accessToken = loginService.getAccessToken(tokenRequest).get();
             // Save 'accessToken' into a database or cache
-            final UpstoxAuth auth = new UpstoxAuth();
-            auth.setAccessToken(accessToken);
-            auth.setApiCredentials(credentials);
-            cache.put(auth);
+            cache.updateAccessToken(accessToken);
         } catch (ExecutionException | InterruptedException e) {
             log.fatal("Error obtaining access token", e);
             throw e;

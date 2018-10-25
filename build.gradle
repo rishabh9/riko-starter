@@ -51,7 +51,7 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-log4j2')
     implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
-    implementation('com.github.rishabh9:riko:1.0.2')
+    implementation('com.github.rishabh9:riko:2.0.0')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
